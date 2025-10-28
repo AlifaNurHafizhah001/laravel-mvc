@@ -2,60 +2,66 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sistem Tiket Wisata</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
   <style>
     body{
-      min-height:100vh;
-      background: linear-gradient(135deg,#004e92,#000428);
+      min-height:100vh;margin:0;
       display:flex;align-items:center;justify-content:center;
-      font-family:"Poppins",sans-serif;color:#fff;overflow:hidden;
+      font-family:"Poppins",sans-serif;color:#00334a;
+      background:linear-gradient(135deg,#d7f1ff,#7fcde8);
     }
-    .wave{
-      position:fixed;bottom:0;left:0;width:100%;z-index:-1;
-      opacity:.25;
-    }
-    .glass-box{
-      background:rgba(255,255,255,0.15);
-      border:1px solid rgba(255,255,255,0.25);
-      box-shadow:0 8px 32px rgba(0,0,0,0.25);
-      backdrop-filter: blur(16px);
-      border-radius:20px;
+    .glass{
+      background:rgba(255,255,255,.4);
+      border:1px solid rgba(255,255,255,.5);
+      backdrop-filter:blur(14px);
+      border-radius:28px;
       padding:40px 55px;
       text-align:center;
+      box-shadow:0 10px 35px rgba(0,0,0,.15);
+      width:340px;
     }
-    .btn-ocean{
-      width:280px;font-weight:500;
-      background:rgba(255,255,255,0.2);
-      border:1px solid rgba(255,255,255,0.3);
+    .btn-pill{
+      border-radius:999px;
+      background:#005c7a;
       color:#fff;
-      backdrop-filter: blur(12px);
+      padding:10px 20px;
+      font-weight:500;
     }
-    .btn-ocean:hover{
-      background:rgba(255,255,255,0.35);
-      color:#002f46;
-    }
-    .footer{margin-top:25px;font-size:12px;opacity:.8}
+    .btn-pill:hover{background:#00445b;color:#fff}
   </style>
 </head>
 <body>
 
-<img class="wave" src="https://raw.githubusercontent.com/naaficodes/cdn-static/main/svg/wave-1.svg">
-
-<div class="glass-box">
-  <h3 class="mb-2">🌊 Sistem Tiket Wisata</h3>
-  <p class="mb-4">Pilih destinasi untuk melihat harga tiket</p>
-  
+<div class="glass" id="page-list">
+  <h3 class="mb-3">🌊 Sistem Tiket Wisata</h3>
+  <p class="mb-4">Pilih destinasi wisata</p>
   <div class="d-flex flex-column gap-3">
-    <a href="#" class="btn btn-ocean">🏝️ Papuma — Rp 20.000</a>
-    <a href="#" class="btn btn-ocean">🪨 Watu Ulo — Rp 15.000</a>
-    <a href="#" class="btn btn-ocean">🌊 Pancer Puger — Rp 10.000</a>
+    <button class="btn btn-pill" onclick="showDetail('Papuma',20000,'🏝️')">🏝️ Papuma</button>
+    <button class="btn btn-pill" onclick="showDetail('Watu Ulo',15000,'🪨')">🪨 Watu Ulo</button>
+    <button class="btn btn-pill" onclick="showDetail('Pancer Puger',10000,'🌊')">🌊 Pancer Puger</button>
   </div>
-
-  <div class="footer">© 2025 Sistem Tiket Wisata — Laravel Route Demo</div>
 </div>
+
+<div class="glass d-none" id="page-detail">
+  <h3 class="mb-3" id="detail-title"></h3>
+  <p class="mb-4 fs-5">Harga Tiket: <strong id="detail-price"></strong></p>
+  <button class="btn btn-pill" onclick="back()">Kembali</button>
+</div>
+
+<script>
+  function rupiah(x){return 'Rp '+x.toLocaleString('id-ID')}
+  function showDetail(nama,harga,icon){
+    document.getElementById('detail-title').innerText = icon+' Detail Tiket '+nama
+    document.getElementById('detail-price').innerText = rupiah(harga)
+    document.getElementById('page-list').classList.add('d-none')
+    document.getElementById('page-detail').classList.remove('d-none')
+  }
+  function back(){
+    document.getElementById('page-detail').classList.add('d-none')
+    document.getElementById('page-list').classList.remove('d-none')
+  }
+</script>
 
 </body>
 </html>
