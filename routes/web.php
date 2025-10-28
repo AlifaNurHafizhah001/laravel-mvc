@@ -65,3 +65,23 @@ Route::patch('/produk/update-harga', function (Request $request) {
  return "Harga produk berhasil diperbarui menjadi <b>Rp$hargaBaru</b> 
 (tanpa mengubah data lain).";
 });
+
+// Route Nama
+Route::get('/profil/{nama}', function ($Alifa) {
+ return "Halo, ini adalah profil milik: <b>$Alifa</b>";
+});
+
+// Route dengan 2 Parameter
+Route::get('/produk/{kategori}/{id}', function ($kategori, $id) {
+ return "Kategori: <b>$kategori</b> <br> ID Produk: <b>$id</b>";
+});
+
+// Parameter di View
+Route::get('/profil/{nama}', function ($nama) {
+ return view('profil', ['nama' => $nama]);
+});
+
+// Tugas Route
+Route::get('/tiket/{tempat}/{harga}', function ($tempat, $harga) {
+    return view('tiket', ['tempat' => $tempat, 'harga' => $harga]);
+});
